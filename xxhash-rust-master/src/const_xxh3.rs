@@ -3,11 +3,13 @@
 //!This module is efficient only when hashes are guaranteed to be executed at compile time.
 //!At runtime algorithm is written in fairly inefficient code, although still fast enough.
 
-use core::mem;
-
 use crate::xxh32_common as xxh32;
 use crate::xxh64_common as xxh64;
 use crate::xxh3_common::*;
+
+
+use core::mem;
+
 
 const INITIAL_ACC: [u64; ACC_NB] = [
     xxh32::PRIME_3 as u64, xxh64::PRIME_1, xxh64::PRIME_2, xxh64::PRIME_3,
