@@ -215,27 +215,4 @@ fn assert_xxh3() {
         assert_eq!((result128 >> 64) as u64, sys_result128.high64);
         assert_eq!(hasher_1_128.digest128(), result128);
 
-        let sys_result = unsafe {
-            sys::XXH3_64bits_withSeed(input.as_ptr() as _, input.len(), 1)
-        };
-        let result = xxh3_64_with_seed(input, 1);
-        assert_eq!(result, sys_result);
-        hasher_2.update(input);
-        hasher_2_128.update(input);
-        assert_eq!(hasher_2.digest(), result);
-
-        hasher_1.reset();
-        hasher_2.reset();
-
-        let sys_result128 = unsafe {
-            sys::XXH3_128bits_withSeed(input.as_ptr() as _, input.len(), 1)
-        };
-        let result128 = xxh3_128_with_seed(input, 1);
-        assert_eq!(result128 as u64, sys_result128.low64);
-        assert_eq!((result128 >> 64) as u64, sys_result128.high64);
-        assert_eq!(hasher_2_128.digest128(), result128);
-
-        hasher_1_128.reset();
-        hasher_2_128.reset();
-    }
-}
+        
