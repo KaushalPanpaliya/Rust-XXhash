@@ -60,34 +60,4 @@ pub const fn xxh64(input: &[u8], seed: u64) -> u64 {
         let mut v3 = seed;
         let mut v4 = seed.wrapping_sub(PRIME_1);
 
-        loop {
-            v1 = round(v1, read_u64(input, cursor));
-            cursor += mem::size_of::<u64>();
-            v2 = round(v2, read_u64(input, cursor));
-            cursor += mem::size_of::<u64>();
-            v3 = round(v3, read_u64(input, cursor));
-            cursor += mem::size_of::<u64>();
-            v4 = round(v4, read_u64(input, cursor));
-            cursor += mem::size_of::<u64>();
-
-            if (input.len() - cursor) < CHUNK_SIZE {
-                break;
-            }
-        }
-
-        result = v1.rotate_left(1).wrapping_add(v2.rotate_left(7))
-                                  .wrapping_add(v3.rotate_left(12))
-                                  .wrapping_add(v4.rotate_left(18));
-
-        result = merge_round(result, v1);
-        result = merge_round(result, v2);
-        result = merge_round(result, v3);
-        result = merge_round(result, v4);
-    } else {
-        result = seed.wrapping_add(PRIME_5)
-    }
-
-    result = result.wrapping_add(input_len);
-
-    finalize(result, input, cursor)
-}
+       
